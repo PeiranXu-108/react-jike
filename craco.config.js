@@ -1,9 +1,13 @@
 //扩展webpack配置
 // craco.config.js
-import { resolve } from 'path';
+const path = require('path');
 
-export const webpack = {
-    alias: {
-        '@': resolve(__dirname, 'src')
+console.log("Craco Config is loaded!"); // 确认加载了该配置
+
+module.exports = {
+    webpack: {
+        alias: {
+            '@': path.resolve(__dirname, 'src')
+        }
     }
 };
