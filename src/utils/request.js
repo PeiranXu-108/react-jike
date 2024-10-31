@@ -1,5 +1,6 @@
 // 导入 axios 模块
 import axios from 'axios';
+import { getToken } from './token';
 
 // 创建 axios 实例，并设置基本配置
 const request = axios.create({
@@ -9,7 +10,13 @@ const request = axios.create({
 
 // 添加请求拦截器
 request.interceptors.request.use((config) => {
-    // 在请求发送前做些什么
+    // 操作config 注入token数据
+    // 1. 获取token
+    // 2. 按照后端格式要求做token拼接
+    const token = getToken()
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
     return config;
 }, (error) => {
     // 处理请求错误
